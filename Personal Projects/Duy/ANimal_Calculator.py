@@ -16,7 +16,6 @@ if moi >= dog:
     print("You can eat your dog ez pz")
 elif moi <= dog:
     print("You need to do a lot more training like me to get the dog")
-elif moi == dog:
     print("Just run faster idiot to get dog")
 
 
