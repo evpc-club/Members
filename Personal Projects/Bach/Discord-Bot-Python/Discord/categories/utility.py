@@ -10,7 +10,7 @@ class Utility(commands.Cog):
         '''
         Show the latency of the bot.
         **Usage:** <prefix>**ping**
-        **Example:** {p}ping
+        **Example:** {0}ping
         '''
 
         latency = self.bot.latency
@@ -22,7 +22,7 @@ class Utility(commands.Cog):
         '''
         Repeat what you say.
         **Usage:** <prefix>**say** <message (can contain spaces)>
-        **Example:** {p}say MikeJollie is gay.
+        **Example:** {0}say MikeJollie is gay.
         '''
 
         await ctx.send(content)
@@ -33,12 +33,11 @@ class Utility(commands.Cog):
         A mini calculator that calculate almost everything.
         Note: This command is still in testing.
         **Usage:** <prefix>**calc** <expression>
-        **Example 1:** {p}calc 1+2
-        **Example 2:** {p}calc 5*(2 + 3)
-        **Example 3:** {p}calc sqrt(25)
+        **Example 1:** {0}calc 1+2
+        **Example 2:** {0}calc 5*(2 + 3)
+        **Example 3:** {0}calc sqrt(25)
         '''
-        # I'd be appreciate if anyone can help me improving the expression evaluation (with math functions) without using eval.
-        # For example, the following expression should works fine: 5 * 3 + sin(4) * -5.3
+
         from categories.utilityfun.calc import calculate
         result = calculate(content)
         embed = discord.Embed(color = discord.Color.green())
@@ -51,7 +50,7 @@ class Utility(commands.Cog):
         Send an embed message. You'll respond to 3 questions to set the embed you want.
         Note: This command is incomplete and is full of errors. Use at your own desire.
         **Usage:** <prefix>**embed**
-        **Example:** {p}embed
+        **Example:** {0}embed
         '''
 
         import asyncio

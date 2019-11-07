@@ -10,8 +10,8 @@ class UserProfile(commands.Cog):
         '''
         Information about yourself or another member.
         **Usage:** <prefix>**profile** [name/ID/nickname/mention]
-        **Example 1:** {p}profile MikeJollie
-        **Example 2:** {p}profile
+        **Example 1:** {0}profile MikeJollie
+        **Example 2:** {0}profile
         '''
 
         if user == None:

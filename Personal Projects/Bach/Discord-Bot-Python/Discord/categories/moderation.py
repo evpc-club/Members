@@ -11,8 +11,8 @@ class Moderation(commands.Cog):
         '''
         Kick a member.
         **Usage:** <prefix>**kick** <name/ID/nickname/mention> [reason]
-        **Example 1:** {p}kick MikeJollie Dumb
-        **Example 2:** {p}kick @MikeJollie Still dumb
+        **Example 1:** {0}kick MikeJollie Dumb
+        **Example 2:** {0}kick @MikeJollie Still dumb
         '''
 
         guild = ctx.author.guild
@@ -30,8 +30,8 @@ class Moderation(commands.Cog):
         '''
         Ban a member.
         **Usage:** <prefix>**ban** <name/ID/nickname/mention> [reason]
-        **Example 1:** ban MikeJollie Spam too much
-        **Example 2:** ban @MikeJollie Stop spamming!
+        **Example 1:** {0}ban MikeJollie Spam too much
+        **Example 2:** {0}ban @MikeJollie Stop spamming!
         '''
 
         guild = ctx.author.guild
