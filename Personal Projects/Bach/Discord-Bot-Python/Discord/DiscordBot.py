@@ -20,7 +20,7 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print("------------")
-    await bot.change_presence(status = discord.Status.online, activity = discord.Game(" with nuclear bomb"))
+    await bot.change_presence(status = discord.Status.idle, activity = discord.Game(" with nuclear bomb"))
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -38,15 +38,6 @@ async def on_command_error(ctx, error):
         await ctx.send(error)
         print(traceback.print_exc())
 
-@bot.event
-async def on_message_edit(previous, current):
-    guild = previous.guild
-    async for entry in guild.audit_logs(limit = 1):
-        print(entry.action)
-        print("Before: {}\nAfter: {}".format(previous.content, current.content))
-
-bot.remove_command("help")
-    
 try:
     if __name__ == "__main__":
         for filename in os.listdir('./categories'):
