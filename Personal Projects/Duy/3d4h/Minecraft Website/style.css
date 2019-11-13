@@ -1,0 +1,43 @@
+.middle {
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: 60px;
+    text-align: center;
+    text-decoration: underline overline;
+}
+
+#title {
+    background-color: #91FA6D;
+    font-family: 'ZCOOL KuaiLe', cursive;
+    font-size: 60px;
+    text-align: center;
+    text-decoration: underline overline;
+}
+
+#connection {
+    background-color: #FFE1DE;
+}
+
+#discord {
+    background-color: #7289da;
+}
+
+#pictures {
+    background-color: #FFDEFD;
+}
+
+h1 {
+    font-size: 45px;
+}
+
+img {
+    width: 50%;
+    height: 50%;
+}
+
+body {
+    font-size: 30px;
+    font-family: 'PT Sans', sans-serif;
+    background-color: #DEFFFF;
+    text-align: center;
+    list-style-position: inside;
+}
