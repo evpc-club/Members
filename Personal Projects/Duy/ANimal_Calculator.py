@@ -11,12 +11,14 @@ dog = speed(int(input("How many legs does your dog have ")), int(input("How long
 print("Calculating")
 time.sleep(2)
 print("-_-_-_-_-_-_-_-_-_-_-Results-_-_-_-_-_-_-_-_-_-_-\n")
-
+time.sleep(1)
 if moi >= dog:
     print("You can eat your dog ez pz")
 elif moi <= dog:
     print("You need to do a lot more training like me to get the dog")
     print("Just run faster idiot to get dog")
+
+time.sleep(500)
 
 
 
