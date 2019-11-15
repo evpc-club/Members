@@ -13,21 +13,35 @@
     text-decoration: underline overline;
 }
 
-#connection {
-    background-color: #FFE1DE;
-}
-
 #discord {
-    background-color: #7289da;
+    color: #7289da    ;
 }
 
-#pictures {
-    background-color: #FFDEFD;
+#discord:hover {
+    color: #5C44DF;
+}
+
+#special {
+    text-decoration: none;
+}
+
+a {
+    color: #555555;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #000000;
 }
 
 h1 {
     font-size: 45px;
 }
+
+.par {
+    text-decoration: underline;
+}
+
 
 img {
     width: 50%;
