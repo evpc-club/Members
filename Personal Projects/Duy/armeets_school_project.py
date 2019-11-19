@@ -1,16 +1,15 @@
-import time
 
-name = input("Enter Name ")
-print("Hello ", name)
-age = input("Enter age ")
-print("oh your ", age)
-school = input("where do you go to school ")
-print("oh you go to", school)
-for x in range(101):
-    print("collecting location data in", x)
-print("\n collecting social security data ...")
-time.sleep(3)
-print("\n social security data collected")
-time.sleep(2)
-for x in range(1000000):
-    print("\nsexual predator here")
+def ask():
+    name = input("What is your name")
+    age = input("How old are you")
+    ask = input("Are your parents with you y/n")
+    while ask != ("y" or "n"):
+        ask = input("Are your parents with you y/n")
+    if ask == "n":
+        print("nevermind")
+    elif ask == "y":
+        print("test")
+
+ask()
+
+
