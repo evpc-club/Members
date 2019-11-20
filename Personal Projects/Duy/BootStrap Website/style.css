@@ -23,7 +23,7 @@ body {
   }
 
 .header {
-    background-image: url('images/header-background.jpg');
+    background-image: url('Banner.png');
     background-size: cover;
     background-position: center;
     position: relative;
@@ -55,3 +55,50 @@ body {
     font-size: 1.3rem;
     line-height: 1.5;
     }      
+
+    .description button {
+      border:1px solid #6ab446;
+      background:#6ab446;
+      border-radius: 0;
+      color:#fff;
+    }
+    .description button:hover {
+      border:1px solid #fff;
+      background:#fff;
+      color:#000;
+    }
+
+
+    .features {
+      margin: 4em auto;
+      padding: 1em;
+      position: relative;
+    }
+    .feature-title {
+      color: #333;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .features img {
+      -webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+      -moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+      box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+      margin-bottom: 16px;
+    }
+
+    .features .form-control,
+    .features input {
+        border-radius: 0;
+    }
+    .features .btn {
+      background-color: #589b37;
+      border: 1px solid #589b37;
+      color: #fff;
+      margin-top: 20px;
+    }
+    .features .btn:hover {
+      background-color: #333;
+      border: 1px solid #333;
+    }
