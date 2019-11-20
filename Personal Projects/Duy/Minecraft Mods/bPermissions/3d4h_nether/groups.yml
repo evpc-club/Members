@@ -1,0 +1,8 @@
+default: default
+groups:
+  default:
+    permissions: []
+    groups: []
+  moderator:
+    permissions: []
+    groups: []

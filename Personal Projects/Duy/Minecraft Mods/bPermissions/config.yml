@@ -1,0 +1,6 @@
+auto-save: true
+track-type: multi
+debug-mode: false
+allow-offline-mode: false
+use-global-files: false
+track-limit: false

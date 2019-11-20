@@ -1,0 +1,29 @@
+lastAccountName: ZatchZ
+timestamps:
+  login: 1574233665812
+  lastteleport: 1574232529698
+  logout: 1574233886965
+  kits:
+    firework: 1573425912099
+    color: 1573377839577
+    test: 1573373317113
+    notch: 1573377848700
+    pvp: 1574191161586
+    dtools: 1573377340754
+    tools: 1573980306201
+ipAddress: 99.61.165.243
+afk: false
+lastlocation:
+  world: 3d4h
+  x: -63.02584816784894
+  y: 76.23272810931658
+  z: 11.010334348539743
+  yaw: 244.80225
+  pitch: 14.100267
+logoutlocation:
+  world: 3d4h
+  x: 285.5659198346443
+  y: 71.0
+  z: -209.89136306379214
+  yaw: -121.95059
+  pitch: -90.0
