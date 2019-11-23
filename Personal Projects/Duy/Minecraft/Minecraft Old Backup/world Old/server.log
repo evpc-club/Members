@@ -1,0 +1,22 @@
+2019-6-26 03:12:27 [INFO] Loading nukkit.yml...
+2019-6-26 03:12:28 [INFO] Loading server properties...
+2019-6-26 03:12:28 [INFO] Selected English (eng) as the base language
+2019-6-26 03:12:28 [INFO] Starting Minecraft: PE server version v1.8.0
+2019-6-26 03:12:28 [INFO] Selected Zlib Provider: 2 (cn.nukkit.utils.ZlibThreadLocal)
+2019-6-26 03:12:28 [INFO] Opening server on 144.217.35.158:25597
+2019-6-26 03:12:28 [INFO] This server is running Nukkit version git-7836723 "" (API 1.0.7)
+2019-6-26 03:12:28 [INFO] Nukkit is distributed under the LGPL License
+2019-6-26 03:12:28 [INFO] Loading recipes...
+2019-6-26 03:12:28 [INFO] Loaded 954 recipes.
+2019-6-26 03:12:28 [INFO] Successfully loaded 0 resource packs
+2019-6-26 03:12:28 [ALERT] java.lang.NumberFormatException: For input string: "survival"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:580)
+	at java.lang.Integer.parseInt(Integer.java:615)
+	at cn.nukkit.Server.getPropertyInt(Server.java:1864)
+	at cn.nukkit.Server.getGamemode(Server.java:1269)
+	at cn.nukkit.event.server.QueryRegenerateEvent.<init>(QueryRegenerateEvent.java:64)
+	at cn.nukkit.Server.<init>(Server.java:425)
+	at cn.nukkit.Nukkit.main(Nukkit.java:109)
+
+2019-6-26 03:12:28 [INFO] Stopping other threads
