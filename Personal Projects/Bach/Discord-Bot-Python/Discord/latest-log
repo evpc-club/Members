@@ -1,0 +1,25 @@
+Version 1.1.1.1
+Date: Nov 27 2019
+
+This update focus mostly on technical Moderation category.
+
+Bug fixes:
+- Fixed a bug that throw FORBIDDEN when trying to kick/ban someone is higher than the bot.
+
+Changes and Features:
+- Added more responses when moderation commands fail.
+
+Development Changes:
+- Reorganized on_command_error
+- Added _error to kick and ban.
+- Renamed dev command.
+- Changed the way the exceptions are printed.
+
+Known Bugs:
+- calc expose a real fatal bug. Please don't abuse, especially for developers.
+
+Working On:
+- Fixing bugs.
+- Adding log for kicked members.
+- Improving old commands.
+- help-all and help.
