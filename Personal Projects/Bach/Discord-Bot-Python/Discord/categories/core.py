@@ -1,10 +1,15 @@
 import discord
 from discord.ext import commands
 
+from categories.templates.help import BigHelp
+from categories.templates.help import SmallHelp
+
 class Core(commands.Cog):
+    '''Commands related to information and bot settings.'''
     def __init__(self, bot):
         self.bot = bot
-        from categories.templates.help import BigHelp
+        self.emoji = '1️⃣'
+        
         self.bot.help_command = BigHelp()
         self.bot.help_command.cog = self
     
@@ -129,7 +134,7 @@ class Core(commands.Cog):
     @commands.command()
     async def note(self, ctx):
         '''
-        Provide syntax convention in {0}help.
+        Provide syntax convention in `help` and `help-all`.
         **Usage:** <prefix>**note**
         **Example:** {0}note
 
@@ -210,6 +215,33 @@ class Core(commands.Cog):
             embed = discord.Embed(description = message.content, color = discord.Color.green())
             paginator.add_page(embed)
         await paginator.event(self.bot, ctx.channel)
+
+    @commands.command()
+    async def help(self, ctx, categoryOrcommand = ""):
+        '''
+        Show compact help about the bot, a command, or a category.
+        Note: command name and category name is case sensitive; Core is different from core.
+        **Usage:** <prefix>**help** [command/category]
+        **Example 1:** {0}help
+        **Example 2:** {0}help info
+        **Example 3:** {0}help Core
+                       
+        You need: None.
+        I need: send_messages.
+        '''
+        help_command = SmallHelp(ctx)
+        if categoryOrcommand == "":
+            await help_command.send_bot_help()
+        else:
+            category = self.bot.get_cog(categoryOrcommand)
+            command = self.bot.get_command(categoryOrcommand)
+
+            if category != None:
+                await help_command.send_cog_help(category)
+            elif command != None:
+                await help_command.send_command_help(command)
+            else:
+                await ctx.send("Command \"%s\" not found." % categoryOrcommand)
 
 def setup(bot):
     bot.add_cog(Core(bot))

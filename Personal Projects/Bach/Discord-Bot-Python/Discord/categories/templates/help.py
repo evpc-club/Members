@@ -2,20 +2,39 @@ import discord
 from discord.ext import commands
 
 from categories.templates.navigate import Pages
+from categories.templates.menu import Menu
+
+def cog_help_format(cog):
+    content = discord.Embed(color = discord.Color.green())
+    display = ""
+    command_list = cog.get_commands()
+    for command in command_list:
+        if not command.hidden:
+            display += '`%s`: %s\n' % (command.name, command.short_doc)
+    
+    content.add_field(name = cog.qualified_name, value = display)
+    return content
+
+def command_help_format(ctx, command):
+    content = discord.Embed(color = discord.Color.green())
+    content.add_field(name = command.name, value = command.help.format(ctx.prefix))
+
+    return content
 
 class BigHelp(commands.HelpCommand):
     def __init__(self):
         docstring = '''Show help about the bot, a command, or a category.
                        Note: command name and category name is case sensitive; Core is different from core.
-                       **Usage:** <prefix>**help** [command/category]
-                       **Example 1:** {0}help
-                       **Example 2:** {0}help info
-                       **Example 3:** {0}help Core
+                       **Usage:** <prefix>**help-all** [command/category]
+                       **Example 1:** {0}help-all
+                       **Example 2:** {0}help-all info
+                       **Example 3:** {0}help-all Core
                        
                        You need: None.
                        I need: send_messages.'''
         super().__init__(command_attrs = {
-            'help': docstring
+            'help': docstring,
+            'name': "help-all"
         })
     async def send_bot_help(self, mapping):
         content = discord.Embed(color = discord.Color.green())
@@ -42,17 +61,49 @@ class BigHelp(commands.HelpCommand):
         await self.context.channel.send(embed = content)
 
     async def send_cog_help(self, cog):
-        content = discord.Embed(color = discord.Color.green())
-        display = ""
-        command_list = cog.get_commands()
-        for command in command_list:
-            display += '`%s`: %s\n' % (command.name, command.short_doc)
-        
-        content.add_field(name = cog.qualified_name, value = display)
-
+        content = cog_help_format(cog)
+        print(cog.description)
         await self.context.channel.send(embed = content)
         
     async def send_command_help(self, command):
-        content = discord.Embed(color = discord.Color.green())
-        content.add_field(name = command.name, value = command.help.format(self.context.prefix))    
+        content = command_help_format(self.context, command)
         await self.context.send(embed = content)
+
+class SmallHelp():
+    def __init__(self, ctx):
+        self.ctx = ctx
+
+    async def send_bot_help(self):
+        main_page = discord.Embed(color = discord.Color.green())
+        cog = self.ctx.bot.cogs
+        cog_info = {}
+        for category in cog:
+            num_of_commands = 0
+            commands = cog[category].get_commands()
+            for command in commands:
+                if not command.hidden:
+                    num_of_commands += 1
+            if num_of_commands != 0:
+                embed_name = "%s (%s commands): " % (category, str(num_of_commands))
+                main_page.add_field(name = embed_name, value = cog[category].description, inline = False)
+            
+            cog_info[category] = num_of_commands
+        menu = Menu(main_page, '✖️', '🔼')
+        for category in cog:
+            if cog_info[category] > 0:
+                menu.add_page(cog[category].emoji, cog_help_format(cog[category]))
+        
+        await menu.event(self.ctx.bot, self.ctx.channel)
+    
+    async def send_cog_help(self, cog):
+        paginate = Pages()
+        for command in cog.get_commands():
+            page = command_help_format(self.ctx, command)
+            paginate.add_page(page)
+        
+        await paginate.event(self.ctx.bot, self.ctx.channel)
+    
+    async def send_command_help(self, command):
+        await self.ctx.send(embed = command_help_format(self.ctx, command))
+
+        
