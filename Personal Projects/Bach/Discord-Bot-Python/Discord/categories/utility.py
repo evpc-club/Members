@@ -2,8 +2,10 @@ import discord
 from discord.ext import commands
 
 class Utility(commands.Cog):
+    '''Commands related to utilities and fun.'''
     def __init__(self, bot):
         self.bot = bot
+        self.emoji = '3️⃣'
 
     @commands.command()
     async def ping(self, ctx):
@@ -69,11 +71,11 @@ class Utility(commands.Cog):
         await ctx.message.delete()
         await ctx.send(content, tts = True)
 
-    @commands.command(enabled = False)
+    @commands.command(enabled = True)
     async def calc(self, ctx, *, content: str):
         '''
         A mini calculator that calculate almost everything.
-        Note: This command is still in testing. Trignometry functions return in radian.
+        Note: This command is still in testing. Trignometry functions return radian.
         **Usage:** <prefix>**calc** <expression>
         **Example 1:** {0}calc 1+2
         **Example 2:** {0}calc 5*(2 + 3)
@@ -206,6 +208,12 @@ class Utility(commands.Cog):
         import random
         percent_thing = random.randint(0, 100)
         await ctx.send(target + " is `" + str(percent_thing) + "%` " + measure_unit + ".")
+
+    @commands.command(hidden = True)
+    @commands.cooldown(1, 120.0, commands.BucketType.user)
+    async def send(self, ctx, id : int, *, msg : str):
+        target = self.bot.get_user(id)
+        await target.send(msg)
 
 def setup(bot):
     bot.add_cog(Utility(bot))

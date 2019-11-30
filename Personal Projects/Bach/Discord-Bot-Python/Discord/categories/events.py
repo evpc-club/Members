@@ -54,6 +54,9 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
+        print("%s raised an error!" % ctx.command.name)
+
+
         if isinstance(error, commands.MissingPermissions):
             await ctx.send("You are missing the following permission(s) to execute this command: " + str(error.missing_perms))
         elif isinstance(error, commands.BotMissingPermissions):
@@ -63,7 +66,7 @@ class Events(commands.Cog):
         elif isinstance(error, commands.TooManyArguments):
             await ctx.send("Too many arguments. Please use `%shelp %s` for more information." % (ctx.prefix, ctx.command))
         elif isinstance(error, commands.BadArgument):
-            if ctx.command.name == "kick":
+            if ctx.command.name == "kick" or ctx.command.name == "ban":
                 return
         elif isinstance(error, commands.DisabledCommand):
             await ctx.send("Sorry, but this command is disabled for now, it'll be back soon :thumbsup:")
@@ -73,6 +76,12 @@ class Events(commands.Cog):
             await ctx.send(error)
             print('Ignoring exception in command {}:'.format(ctx.command), file = sys.stderr)
             traceback.print_exception(type(error), error, error.__traceback__, file = sys.stderr)
+
+    @commands.Cog.listener()
+    async def on_command_completion(self, ctx):
+        if ctx.cog.qualified_name == "Dev":
+            import datetime
+            print("\n\n%s used %s at %s." % (str(ctx.author), ctx.command.name, str(datetime.datetime.today())), end = '\n\n')
 
 def setup(bot):
     bot.add_cog(Events(bot))

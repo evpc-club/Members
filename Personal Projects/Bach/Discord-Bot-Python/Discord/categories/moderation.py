@@ -2,8 +2,10 @@ import discord
 from discord.ext import commands
 
 class Moderation(commands.Cog):
+    '''Commands related to moderate actions such as kick, ban, etc.'''
     def __init__(self, bot):
         self.bot = bot
+        self.emoji = '2️⃣'
     
     @commands.command()
     @commands.has_permissions(kick_members = True)

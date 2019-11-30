@@ -1,25 +1,24 @@
-Version 1.1.1.1
-Date: Nov 27 2019
-
-This update focus mostly on technical Moderation category.
+Version 1.1.2
+Date: Nov 28 2019
 
 Bug fixes:
-- Fixed a bug that throw FORBIDDEN when trying to kick/ban someone is higher than the bot.
+- Fixed a fatal bug in calc.
 
 Changes and Features:
-- Added more responses when moderation commands fail.
+- Rework on help. Old help now is help-all.
+- Added page number for changelog, help and commands that use "flipping-pages-format".
 
 Development Changes:
-- Reorganized on_command_error
-- Added _error to kick and ban.
-- Renamed dev command.
-- Changed the way the exceptions are printed.
+- Added cog_help_format and command_help_format.
+- Added SmallHelp.
+- Added Menu.
+- Token now store in .env file.
 
 Known Bugs:
-- calc expose a real fatal bug. Please don't abuse, especially for developers.
+No report.
 
 Working On:
-- Fixing bugs.
+- Improving help UI.
 - Adding log for kicked members.
 - Improving old commands.
-- help-all and help.
+- Reorganizing commands.

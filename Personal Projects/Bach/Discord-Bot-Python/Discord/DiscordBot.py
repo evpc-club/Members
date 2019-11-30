@@ -2,12 +2,13 @@
 
 import os
 import traceback
+from dotenv import load_dotenv
+
 import discord
 from discord.ext import commands
 
-fin = open("./setup/token.txt", 'r')
-TOKEN = fin.read()
-fin.close()
+load_dotenv()
+TOKEN = os.getenv("token")
 fin = open("./setup/prefix.txt", 'r')
 prefix = fin.read()
 fin.close()
