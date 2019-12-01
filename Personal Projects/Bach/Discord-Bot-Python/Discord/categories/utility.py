@@ -5,7 +5,7 @@ class Utility(commands.Cog):
     '''Commands related to utilities and fun.'''
     def __init__(self, bot):
         self.bot = bot
-        self.emoji = '3️⃣'
+        self.emoji = '😆'
 
     @commands.command()
     async def ping(self, ctx):
@@ -168,8 +168,7 @@ class Utility(commands.Cog):
                     await clean(prompt)
                 
 
-                embed = discord.Embed(color = color)
-                embed.add_field(name = title, value = content)
+                embed = discord.Embed(title = title, description = content, color = color)
 
                 await ctx.send(embed = embed)
 
@@ -189,7 +188,7 @@ class Utility(commands.Cog):
         
         import random
         percent_gay = random.randint(0, 100)
-        await ctx.send(target + " is `" + str(percent_gay) + "%` gay.")
+        await ctx.send(target + " is `" + str(percent_gay) + "%` gay 🏳️‍🌈.")
 
     @commands.command()
     @commands.cooldown(5, 10.0, commands.BucketType.user)
@@ -212,8 +211,28 @@ class Utility(commands.Cog):
     @commands.command(hidden = True)
     @commands.cooldown(1, 120.0, commands.BucketType.user)
     async def send(self, ctx, id : int, *, msg : str):
+        '''
+        Send a message to either a channel or a user that the bot can see.
+        **Usage:** <prefix>**send** <user ID / channel ID> <content>
+        **Cooldown:** 120 seconds (user cooldown)
+        **Example 1:** {0}send 577663051722129427 Gay.
+        **Example 2:** {0}send 400983101507108876 All of you are gay.
+
+        You need: None.
+        I need: send_messages at <destination>.
+        '''
         target = self.bot.get_user(id)
-        await target.send(msg)
+        if target == None:
+            target = self.bot.get_channel(id)
+            if target == None:
+                await ctx.send("Destination not found.")
+                return
+        try:
+            await target.send(msg)
+        except AttributeError:
+            await ctx.send("I cannot send message to myself dummy.")
+        except discord.Forbidden:
+            await ctx.send("It seems like I cannot send message to this place!")
 
 def setup(bot):
     bot.add_cog(Utility(bot))

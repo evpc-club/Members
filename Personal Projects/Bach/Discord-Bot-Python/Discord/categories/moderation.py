@@ -5,13 +5,13 @@ class Moderation(commands.Cog):
     '''Commands related to moderate actions such as kick, ban, etc.'''
     def __init__(self, bot):
         self.bot = bot
-        self.emoji = '2️⃣'
+        self.emoji = '🔨'
     
     @commands.command()
     @commands.has_permissions(kick_members = True)
     @commands.bot_has_permissions(kick_members = True)
     @commands.cooldown(2, 5.0, commands.BucketType.guild)
-    async def kick(self, ctx, member : discord.Member, reason = None):
+    async def kick(self, ctx, member : discord.Member, *, reason = None):
         '''
         Kick a member.
         **Usage:** <prefix>**kick** <name/ID/nickname/mention> [reason]

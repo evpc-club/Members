@@ -1,4 +1,5 @@
 import discord
+import asyncio
 
 # A class that support navigating pages of embeds.
 
@@ -10,7 +11,6 @@ class Pages:
     
     def add_page(self, page):
         if isinstance(page, discord.Embed):
-            page.set_footer(text = "Page %d" % (len(self.__page_list__) + 1))
             self.__page_list__.append(page)
         else:
             raise TypeError("'page' must be discord.Embed.")
@@ -19,7 +19,9 @@ class Pages:
         if len(self.__page_list__) == 0:
             return
         
-        import asyncio
+        for num in range(0, len(self.__page_list__)):
+            self.__page_list__[num].set_footer(text = "Page %d/%d" % (num + 1, len(self.__page_list__)))
+
         message = await src.send(embed = self.__page_list__[self.__current_page__])
         for emoji in self.__emoji_list__:
             await message.add_reaction(emoji)
