@@ -1,19 +1,19 @@
-**__Version 1.1.2.2__**
+Version 1.1.2.2
 Date: Nov 28 2019
 
-**Bug fixes:**
+Bug fixes:
 - Fix all bugs mentioned in previous version.
 
-**Changes and Features:**
-- `changelog` page now has the format `Page <page>/<max>`.
+Changes and Features:
+- changelog page now has the format Page <page>/<max>.
 
-**Development Changes:**
-- Added `emoji` attr for most categories.
+Development Changes:
+- Added emoji attr for most categories.
 
-**Known Bugs:**
+Known Bugs:
 - Paginator and menu can be reacted by different user, creating annoyance to the person invoked the command.
 
-**Working On:**
+Working On:
 - Finding bugs.
 - Improving log format.
 - Reorganizing commands.
