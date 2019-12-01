@@ -1,24 +1,19 @@
-Version 1.1.2
+**__Version 1.1.2.2__**
 Date: Nov 28 2019
 
-Bug fixes:
-- Fixed a fatal bug in calc.
+**Bug fixes:**
+- Fix all bugs mentioned in previous version.
 
-Changes and Features:
-- Rework on help. Old help now is help-all.
-- Added page number for changelog, help and commands that use "flipping-pages-format".
+**Changes and Features:**
+- `changelog` page now has the format `Page <page>/<max>`.
 
-Development Changes:
-- Added cog_help_format and command_help_format.
-- Added SmallHelp.
-- Added Menu.
-- Token now store in .env file.
+**Development Changes:**
+- Added `emoji` attr for most categories.
 
-Known Bugs:
-No report.
+**Known Bugs:**
+- Paginator and menu can be reacted by different user, creating annoyance to the person invoked the command.
 
-Working On:
-- Improving help UI.
-- Adding log for kicked members.
-- Improving old commands.
+**Working On:**
+- Finding bugs.
+- Improving log format.
 - Reorganizing commands.
