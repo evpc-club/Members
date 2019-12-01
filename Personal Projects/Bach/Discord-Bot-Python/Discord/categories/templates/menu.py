@@ -2,12 +2,11 @@ import discord
 import asyncio
 
 class Menu:
-    def __init__(self, init_page, terminate_emoji, return_emoji):
+    def __init__(self, init_page, terminate_emoji = '❌', return_emoji = '🔼'):
         self.__pages__ = {} # A dict with the format {emoji: discord.Embed}
         self.__terminator__ = terminate_emoji
         self.__return__ = return_emoji
 
-        self.__pages__[self.__terminator__] = None
         if isinstance(init_page, discord.Embed):
             self.__init_page__ = init_page
         else:
@@ -26,6 +25,8 @@ class Menu:
         if len(self.__pages__) == 0:
             return
         
+        self.__pages__[self.__terminator__] = None
+
         message = await src.send(embed = self.__init_page__)
         for emoji in self.__pages__:
             await message.add_reaction(emoji)

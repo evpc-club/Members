@@ -75,6 +75,12 @@ class SmallHelp():
 
     async def send_bot_help(self):
         main_page = discord.Embed(color = discord.Color.green())
+        note = '''
+        Use `%shelp [CommandOrCategory]` to get more info on a command/category.
+        If you need help, join the [support server](https://discordapp.com/jeMeyNw).
+        ''' % self.ctx.prefix
+        main_page.add_field(name = "Note:", value = note)
+
         cog = self.ctx.bot.cogs
         cog_info = {}
         for category in cog:
@@ -84,11 +90,11 @@ class SmallHelp():
                 if not command.hidden:
                     num_of_commands += 1
             if num_of_commands != 0:
-                embed_name = "%s (%s commands): " % (category, str(num_of_commands))
+                embed_name = "%s %s (%s commands): " % (cog[category].emoji, category, str(num_of_commands))
                 main_page.add_field(name = embed_name, value = cog[category].description, inline = False)
             
             cog_info[category] = num_of_commands
-        menu = Menu(main_page, '✖️', '🔼')
+        menu = Menu(main_page)
         for category in cog:
             if cog_info[category] > 0:
                 menu.add_page(cog[category].emoji, cog_help_format(cog[category]))

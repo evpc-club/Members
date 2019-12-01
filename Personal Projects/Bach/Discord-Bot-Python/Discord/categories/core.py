@@ -8,7 +8,7 @@ class Core(commands.Cog):
     '''Commands related to information and bot settings.'''
     def __init__(self, bot):
         self.bot = bot
-        self.emoji = '1️⃣'
+        self.emoji = '⚙️'
         
         self.bot.help_command = BigHelp()
         self.bot.help_command.cog = self
@@ -106,7 +106,7 @@ class Core(commands.Cog):
 
         await ctx.send(embed = embed)
 
-    @commands.command(enabled = False)
+    @commands.command()
     @commands.has_permissions(manage_guild = True)
     @commands.cooldown(1, 5.0, commands.BucketType.default)
     async def prefix(self, ctx, pref : str = None):
