@@ -3,11 +3,12 @@ groups:
     options:
       default: true
     permissions:
-    - essentials.kit
-    - essentials.kits.tools
-    - essentials.kits.dtools
-    - essentials.kits.notch
-    - essentials.kits.color
-    - essentials.kits.firework
     - modifyworld.*
 schema-version: 1
+users:
+  af5ccb0d-6903-4a0f-827f-787103230908:
+    options:
+      name: ZatchZ
+    permissions:
+    - mv.bypass.gamemode.creative
+    - mv.bypass.gamemode

@@ -1,23 +1,22 @@
 lastAccountName: Fable5aka
 timestamps:
-  login: 1574222968951
+  login: 1575337561776
+  lastteleport: 1575191941452
+  logout: 1575329830587
   kits:
-    pvp: 1574122533326
-  logout: 1574222984218
-  lastteleport: 1574222696641
+    wand: 1575272852557
 ipAddress: 98.248.91.57
-logoutlocation:
-  world: 3d4h
-  x: 299.5
-  y: 70.0
-  z: -226.5
-  yaw: 234.08293
-  pitch: 31.174545
 lastlocation:
-  world: 3d4h
-  x: 285.63477120822625
-  y: 72.0
-  z: -248.33884177487482
-  yaw: -39.903553
-  pitch: 1.9014077
-teleportenabled: true
+  world: world
+  x: 259.8087678675377
+  y: 100.26633549093731
+  z: -134.3778713288525
+  yaw: 206.69177
+  pitch: 18.45234
+logoutlocation:
+  world: world
+  x: 320.94271880242997
+  y: 61.0
+  z: -172.92132732489833
+  yaw: -157.92432
+  pitch: 37.016754

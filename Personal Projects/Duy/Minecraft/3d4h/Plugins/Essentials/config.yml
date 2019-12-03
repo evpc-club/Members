@@ -312,7 +312,7 @@ enabledSigns:
   #- free
   #- disposal
   #- warp
-  - kit
+  #- kit
   #- mail
   #- enchant
   #- gamemode

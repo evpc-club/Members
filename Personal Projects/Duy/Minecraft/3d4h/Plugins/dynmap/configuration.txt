@@ -13,7 +13,7 @@
 #   The definitions of these templates are in normal-hi_boost_vhi.txt, nether-hi_boost_vhi.txt, and the_end-hi_boost_vhi.txt
 # To use the HDMap hi-res (16 ppb) map templates, with support for boosting resolution selectively to xhi-res (64 ppb), set value to hi_boost_xhi
 #   The definitions of these templates are in normal-hi_boost_xhi.txt, nether-hi_boost_xhi.txt, and the_end-hi_boost_xhi.txt
-deftemplatesuffix: lowres
+deftemplatesuffix: hires
 
 # Map storage scheme: only uncomment one 'type' value
 #  filetree: classic and default scheme: tree of files, with all map data under the directory indicated by 'tilespath' setting
@@ -235,10 +235,10 @@ tileupdatedelay: 30
 enabletilehash: true
 
 # Optional - hide ores: render as normal stone (so that they aren't revealed by maps)
-#hideores: true
+hideores: true
 
 # Optional - enabled BetterGrass style rendering of grass and snow block sides
-#better-grass: true
+better-grass: true
 
 # Optional - enable smooth lighting by default on all maps supporting it (can be set per map as lighting option)
 smooth-lighting: true
@@ -299,7 +299,7 @@ render-triggers:
   #- blockredstone
 
 # Title for the web page - if not specified, defaults to the server's name (unless it is the default of 'Unknown Server')
-#webpage-title: "My Awesome Server Map"
+webpage-title: "3d4h Server Map"
 
 # The path where the tile-files are placed.
 tilespath: web/tiles
@@ -312,10 +312,10 @@ exportpath: export
 
 # The network-interface the webserver will bind to (0.0.0.0 for all interfaces, 127.0.0.1 for only local access).
 # If not set, uses same setting as server in server.properties (or 0.0.0.0 if not specified)
-#webserver-bindaddress: 0.0.0.0
+#webserver-bindaddress: 99.61.165.243
 
 # The TCP-port the webserver will listen on.
-webserver-port: 8163
+webserver-port: 4500
 
 # Maximum concurrent session on internal web server - limits resources used in Bukkit server
 max-sessions: 30
@@ -401,7 +401,7 @@ check-banned-ips: true
 # Default selection when map page is loaded
 defaultzoom: 0
 defaultworld: world
-defaultmap: flat
+defaultmap: surface
 # (optional) Zoom level and map to switch to when following a player, if possible
 #followzoom: 3
 #followmap: surface
