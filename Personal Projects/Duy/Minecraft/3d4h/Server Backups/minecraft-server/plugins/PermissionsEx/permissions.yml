@@ -1,0 +1,14 @@
+groups:
+  default:
+    options:
+      default: true
+    permissions:
+    - modifyworld.*
+schema-version: 1
+users:
+  af5ccb0d-6903-4a0f-827f-787103230908:
+    options:
+      name: ZatchZ
+    permissions:
+    - mv.bypass.gamemode.creative
+    - mv.bypass.gamemode

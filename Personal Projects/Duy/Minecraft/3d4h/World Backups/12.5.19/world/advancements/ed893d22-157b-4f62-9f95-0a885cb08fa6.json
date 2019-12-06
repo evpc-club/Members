@@ -1,0 +1,10 @@
+{
+  "minecraft:adventure/adventuring_time": {
+    "criteria": {
+      "minecraft:beach": "2019-12-04 14:42:11 +0000",
+      "minecraft:dark_forest": "2019-12-05 05:37:24 +0000"
+    },
+    "done": false
+  },
+  "DataVersion": 1976
+}
