@@ -1,0 +1,21 @@
+portals:
+  hub:
+    entryfee:
+      amount: 0.0
+    safeteleport: true
+    teleportnonplayers: false
+    handlerscript: ''
+    owner: ZatchZ
+    location: 306.0,64.0,-155.0:311.0,71.0,-155.0
+    world: world
+    destination: p:netherhub
+  netherhub:
+    entryfee:
+      amount: 0.0
+    safeteleport: true
+    teleportnonplayers: false
+    handlerscript: ''
+    owner: ZatchZ
+    location: 40.0,67.0,-37.0:40.0,71.0,-34.0
+    world: world_nether
+    destination: p:hub
