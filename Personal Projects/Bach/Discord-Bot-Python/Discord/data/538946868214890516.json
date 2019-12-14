@@ -1,0 +1,11 @@
+{
+    "ERROR": 0,
+    "GUILD_ID": 538946868214890516,
+    "STATUS_LOG": 0,
+    "LOG_CHANNEL": 0,
+    "STATUS_WELCOME": 0,
+    "WELCOME_CHANNEL": 0,
+    "WELCOME_TEXT": "",
+    "STATUS_FILTER": 0,
+    "FILTER_WORDS": []
+}

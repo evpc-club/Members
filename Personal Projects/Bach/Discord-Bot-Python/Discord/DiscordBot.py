@@ -9,9 +9,7 @@ from discord.ext import commands
 
 load_dotenv()
 TOKEN = os.getenv("token")
-fin = open("./setup/prefix.txt", 'r')
-prefix = fin.read()
-fin.close()
+prefix = os.getenv("prefix")
 
 bot = commands.Bot(command_prefix = commands.when_mentioned_or(prefix))
     

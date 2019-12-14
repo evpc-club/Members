@@ -2,7 +2,7 @@ import discord
 import asyncio
 
 class Menu:
-    def __init__(self, init_page, terminate_emoji = '❌', return_emoji = '🔼'):
+    def __init__(self, init_page, terminate_emoji, return_emoji):
         self.__pages__ = {} # A dict with the format {emoji: discord.Embed}
         self.__terminator__ = terminate_emoji
         self.__return__ = return_emoji

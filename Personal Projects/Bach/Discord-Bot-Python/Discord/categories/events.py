@@ -3,6 +3,8 @@ from discord.ext import commands
 
 import traceback
 import sys
+import json
+#from Record import Record
 
 class Events(commands.Cog):
     def __init__(self, bot):
@@ -11,22 +13,42 @@ class Events(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         guild_list = self.bot.guilds
+        #guild_info = Record("./data/guild.db")
         for guild in guild_list:
+            # guild configuration
             try:
-                file_name = str(guild.id) + ".txt"
+                file_name = str(guild.id) + ".json"
                 fin = open("./data/" + file_name, 'r')
             except FileNotFoundError as fnfe:
-                fout = open("./data/" + file_name, 'w')
+                fout = open("./data/" + file_name, 'w+')
+                default_config = {
+                    "ERROR": 0,
+                    "GUILD_ID": guild.id,
+                    "STATUS_LOG": 0,
+                    "LOG_CHANNEL": 0,
+                    "STATUS_WELCOME": 0,
+                    "WELCOME_CHANNEL": 0,
+                    "WELCOME_TEXT": "",
+                    "STATUS_FILTER": 0,
+                    "FILTER_WORDS": []
+                }
+                json.dump(default_config, fout, indent = 4)
+                print("File %s created." % file_name)
                 fout.close()
-                print("File %s.txt created." % file_name)
 
+            # guild data
+            #guild_info.create_table(str(guild.id))
+            #for member in guild.members:
+            #    guild_info.create_row(member_id = member.id, description = "", money = 0, warns = 0)
+        
 
+        
 
         print("Logged in as")
         print(self.bot.user.name)
         print(self.bot.user.id)
         print("------------")
-        await self.bot.change_presence(status = discord.Status.online, activity = discord.Game(" with nuclear bomb"))
+        await self.bot.change_presence(status = discord.Status.idle, activity = discord.Game(" with Discord API"))
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -54,10 +76,16 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
-        print("%s raised an error!" % ctx.command.name)
+        try:
+            if isinstance(error, commands.CommandError):
+                print("%s raised an error!" % ctx.command.name)
+        except AttributeError: # If command not found, wrong syntax, etc.
+            pass
 
-
-        if isinstance(error, commands.MissingPermissions):
+        if isinstance(error, commands.CommandNotFound):
+            async with ctx.typing():
+                n = 0
+        elif isinstance(error, commands.MissingPermissions):
             await ctx.send("You are missing the following permission(s) to execute this command: " + str(error.missing_perms))
         elif isinstance(error, commands.BotMissingPermissions):
             await ctx.send("I'm missing the following permission(s) to execute this command: " + str(error.missing_perms))
@@ -73,7 +101,9 @@ class Events(commands.Cog):
         elif isinstance(error, commands.CommandOnCooldown):
             await ctx.send("Hey there slow down! %0.2f seconds left!" % error.retry_after)
         else:
-            await ctx.send(error)
+            error_text = "This command raised the following exception. Please copy and report it to the developer using `report`. Thank you and sorry for this inconvenience."
+            error_text += "```%s```" % error
+            await ctx.send(error_text)
             print('Ignoring exception in command {}:'.format(ctx.command), file = sys.stderr)
             traceback.print_exception(type(error), error, error.__traceback__, file = sys.stderr)
 

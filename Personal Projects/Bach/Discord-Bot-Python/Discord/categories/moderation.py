@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class Moderation(commands.Cog):
+class Moderation(commands.Cog, command_attrs = {"cooldown_after_parsing" : True}):
     '''Commands related to moderate actions such as kick, ban, etc.'''
     def __init__(self, bot):
         self.bot = bot
@@ -110,6 +110,13 @@ class Moderation(commands.Cog):
         await guild.unban(discord.Object(id = id), reason = reason)
         await ctx.send("**User `%s` has been unbanned from %s**" % (str(id), guild))
         await ctx.send("**Reason:** `%s`" % reason)
+
+    @commands.command()
+    @commands.has_permissions(kick_members = True)
+    @commands.bot_has_permissions(kick_members = True)
+    @commands.cooldown(1, 5.0, commands.BucketType.guild)
+    async def mute(self, ctx, id : int, *, reason = None):
+        pass
 
 def setup(bot):
     bot.add_cog(Moderation(bot))

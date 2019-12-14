@@ -3,8 +3,9 @@ from discord.ext import commands
 
 from categories.templates.help import BigHelp
 from categories.templates.help import SmallHelp
+from categories.templates.menu import Menu
 
-class Core(commands.Cog):
+class Core(commands.Cog, command_attrs = {"cooldown_after_parsing" : True}):
     '''Commands related to information and bot settings.'''
     def __init__(self, bot):
         self.bot = bot
@@ -13,14 +14,19 @@ class Core(commands.Cog):
         self.bot.help_command = BigHelp()
         self.bot.help_command.cog = self
     
+    async def cog_check(self, ctx):
+        if isinstance(ctx.channel, discord.DMChannel):
+            await ctx.send("Boi this is not the place to use commands.")
+            return False
+        return True
 
     @commands.command()
     async def info(self, ctx):
         '''
         Information about the bot.
-        **Usage: <prefix>info**
+        **Usage:** <prefix>**{command_name}**
         **Cooldown:** None.
-        **Example:** {0}info
+        **Example:** {prefix}{command_name}
 
         You need: None.
         I need: send_messages.
@@ -38,9 +44,9 @@ class Core(commands.Cog):
     async def profile(self, ctx, user: discord.Member = None):
         '''
         Information about yourself or another __member__.
-        **Usage:** <prefix>**profile** [name/ID/nickname/mention]
-        **Example 1:** {0}profile MikeJollie
-        **Example 2:** {0}profile
+        **Usage:** <prefix>**{command_name}** [ID/mention/name/nickname]
+        **Example 1:** {prefix}{command_name} MikeJollie
+        **Example 2:** {prefix}{command_name}
 
         You need: None.
         I need: send_messages.
@@ -74,8 +80,8 @@ class Core(commands.Cog):
     async def serverinfo(self, ctx):
         '''
         Information about the server that invoke this command.
-        **Usage:** <prefix>**serverinfo**
-        **Example:** {0}serverinfo
+        **Usage:** <prefix>**{command_name}**
+        **Example:** {prefix}{command_name}
 
         You need: None.
         I need: send_messages.
@@ -112,31 +118,29 @@ class Core(commands.Cog):
     async def prefix(self, ctx, pref : str = None):
         '''
         View and set the prefix for the bot.
-        **Usage:** <prefix>**prefix** [new prefix]
+        **Usage:** <prefix>**{command_name}** [new prefix]
         **Cooldown:** 5 seconds (global cooldown).
-        **Example 1:** {0}prefix
-        **Example 2:** {0}prefix %
+        **Example 1:** {prefix}{command_name}
+        **Example 2:** {prefix}{command_name} %
         
         You need: manage_guild.
         I need: send_messages.
         '''
 
         if pref == None:
-            await ctx.send("Current prefix: " + ctx.prefix)
+            await ctx.send("Current prefix: " + self.bot.command_prefix)
         else:
             self.bot.command_prefix = pref
             await ctx.send("New prefix: " + self.bot.command_prefix)
             # Save the prefix
-            fout = open("./setup/prefix.txt", 'w')
-            fout.write(self.bot.command_prefix)
-            fout.close()
-
+            import os
+            os.environ["token2"] = pref
     @commands.command()
     async def note(self, ctx):
         '''
         Provide syntax convention in `help` and `help-all`.
-        **Usage:** <prefix>**note**
-        **Example:** {0}note
+        **Usage:** <prefix>**{command_name}**
+        **Example:** {prefix}{command_name}
 
         You need: None.
         I need: send_messages.
@@ -173,10 +177,10 @@ class Core(commands.Cog):
         '''
         Report a bug or suggest a feature for the bot.
         Note: Provide constructive reports and suggestions are appreciated.
-        **Usage:** <prefix>**report** <report/suggest> <content>
+        **Usage:** <prefix>**{command_name}** <report/suggest> <content>
         **Cooldown:** 3 seconds (global cooldown).
-        **Example 1:** {0}report report This command has a bug.
-        **Example 2:** {0}report suggest This command should be improved.
+        **Example 1:** {prefix}{command_name} report This command has a bug.
+        **Example 2:** {prefix}{command_name} suggest This command should be improved.
 
         You need: None.
         I need: send_messages.
@@ -201,8 +205,8 @@ class Core(commands.Cog):
     async def changelog(self, ctx):
         '''
         Show the latest 10 changes of the bot.
-        **Usage:** <prefix>**changelog**
-        **Example:** {0}changelog
+        **Usage:** <prefix>**{command_name}**
+        **Example:** {prefix}{command_name}
 
         You need: None.
         I need: send_messages.
@@ -221,10 +225,10 @@ class Core(commands.Cog):
         '''
         Show compact help about the bot, a command, or a category.
         Note: command name and category name is case sensitive; Core is different from core.
-        **Usage:** <prefix>**help** [command/category]
-        **Example 1:** {0}help
-        **Example 2:** {0}help info
-        **Example 3:** {0}help Core
+        **Usage:** <prefix>**{command_name}** [command/category]
+        **Example 1:** {prefix}{command_name}
+        **Example 2:** {prefix}{command_name} info
+        **Example 3:** {prefix}{command_name} Core
                        
         You need: None.
         I need: send_messages.
@@ -242,6 +246,9 @@ class Core(commands.Cog):
                 await help_command.send_command_help(command)
             else:
                 await ctx.send("Command \"%s\" not found." % categoryOrcommand)
+        
+
+
 
 def setup(bot):
     bot.add_cog(Core(bot))

@@ -17,7 +17,7 @@ def cog_help_format(cog):
 
 def command_help_format(ctx, command):
     content = discord.Embed(color = discord.Color.green())
-    content.add_field(name = command.name, value = command.help.format(ctx.prefix))
+    content.add_field(name = command.name, value = command.help.format(prefix = ctx.prefix, command_name = command.name))
 
     return content
 
@@ -25,10 +25,10 @@ class BigHelp(commands.HelpCommand):
     def __init__(self):
         docstring = '''Show help about the bot, a command, or a category.
                        Note: command name and category name is case sensitive; Core is different from core.
-                       **Usage:** <prefix>**help-all** [command/category]
-                       **Example 1:** {0}help-all
-                       **Example 2:** {0}help-all info
-                       **Example 3:** {0}help-all Core
+                       **Usage:** <prefix>**{command_name}** [command/category]
+                       **Example 1:** {prefix}{command_name}
+                       **Example 2:** {prefix}{command_name} info
+                       **Example 3:** {prefix}{command_name} Core
                        
                        You need: None.
                        I need: send_messages.'''
@@ -58,11 +58,10 @@ class BigHelp(commands.HelpCommand):
                 embed_name = "%s (%s commands): " % (category, str(num_of_commands))
                 content.add_field(name = embed_name, value = context, inline = False)
 
-        await self.context.channel.send(embed = content)
+        await self.context.send(embed = content)
 
     async def send_cog_help(self, cog):
         content = cog_help_format(cog)
-        print(cog.description)
         await self.context.channel.send(embed = content)
         
     async def send_command_help(self, command):
@@ -94,7 +93,7 @@ class SmallHelp():
                 main_page.add_field(name = embed_name, value = cog[category].description, inline = False)
             
             cog_info[category] = num_of_commands
-        menu = Menu(main_page)
+        menu = Menu(main_page, '✖️', '🔼')
         for category in cog:
             if cog_info[category] > 0:
                 menu.add_page(cog[category].emoji, cog_help_format(cog[category]))

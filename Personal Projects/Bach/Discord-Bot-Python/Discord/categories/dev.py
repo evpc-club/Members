@@ -15,13 +15,13 @@ class Dev(commands.Cog):
     @commands.command(hidden = True)
     @commands.check(is_dev)
     @commands.cooldown(1, 5.0, commands.BucketType.default)
-    async def update_mod(self, ctx, name):
+    async def reload(self, ctx, name):
         '''
         Reload a module.
         Useful when you don't want to disconnect the bot but still update your change.
-        **Usage:** <prefix>**update_mod** <extension name>
+        **Usage:** <prefix>**{command_name}** <extension name>
         **Cooldown:** 5 seconds (global cooldown)
-        **Example:** {0}update_mod categories.templates.navigate
+        **Example:** {prefix}{command_name} categories.templates.navigate
 
         You need: dev status.
         I need: send_messages.
@@ -29,8 +29,8 @@ class Dev(commands.Cog):
         self.bot.reload_extension(name)
         await ctx.send("Reloaded extension " + name)
         print("Reloaded extension " + name)
-    @update_mod.error
-    async def update_mod_error(self, ctx, error):
+    @reload.error
+    async def reload_error(self, ctx, error):
         if isinstance(error, commands.CheckFailure):
             await ctx.send("This command is reserved for bot developers only!")
         elif isinstance(error, commands.ExtensionNotFound):
@@ -41,8 +41,8 @@ class Dev(commands.Cog):
     async def reset_all_cooldown(self, ctx):
         '''
         Self-explanatory.
-        **Usage:** <prefix>**reset_all_cooldown**
-        **Example:** {0}reset_all_cooldown
+        **Usage:** <prefix>**{command_name}**
+        **Example:** {prefix}{command_name}
 
         You need: dev status.
         I need: send_messages.
@@ -52,6 +52,23 @@ class Dev(commands.Cog):
                 command.reset_cooldown(ctx)
         await ctx.send("All cooldown reseted.")
 
+    @commands.command(hidden = True)
+    @commands.check(is_dev)
+    @commands.cooldown(1, 10.0, commands.BucketType.default)
+    async def diary(self, ctx, *, msg : str = ""):
+        '''
+        Act as a commit on GitHub, but personal.
+        **Usage:** <prefix>**{command_name} <message>
+        **Cooldown:** 10 seconds (global cooldown)
+        **Example:** {prefix}{command_name} Created diary
+        '''
+        fout = open("./diary.txt", 'a')
+        fout.write("--------------------------------\n")
+        fout.write("Writer: %s\n" % ctx.author.name)
+        fout.write("Content: %s\n" % msg)
+        fout.write("\n\n")
+        fout.close()
+        await ctx.send("Journal recorded.")
 
 
 def setup(bot):
