@@ -128,8 +128,8 @@ void Game::Update()
 void Game::Render()
 {
 	m_window.BeginDraw();
-	world->render(m_window.getRenderWindow());
 	snake->render(m_window.getRenderWindow());
+	world->render(m_window.getRenderWindow());
 	m_window.EndDraw();
 }
 
