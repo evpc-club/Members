@@ -75,7 +75,7 @@ void World::render(sf::RenderWindow& window)
 	sf::RectangleShape worldShape;
 
 	worldShape.setSize(sf::Vector2f(gridSize, gridSize));
-	worldShape.setFillColor(sf::Color::Black);
+	worldShape.setFillColor(sf::Color::Transparent);
 	worldShape.setOutlineColor(sf::Color(52, 73, 94));
 	worldShape.setOutlineThickness(0.5f);
 
