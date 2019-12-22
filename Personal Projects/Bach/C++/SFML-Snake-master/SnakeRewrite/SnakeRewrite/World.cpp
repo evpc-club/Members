@@ -6,7 +6,6 @@ World::World(int sizex, int sizey, int grid)
 {
 	gridSize = grid;
 	worldSize = Coordinate(sizex / grid, sizey / grid);
-	std::cout << "World size: " << worldSize.x << ", " << worldSize.y << std::endl;
 
 	if (!appleTexture.loadFromFile("apple.jpg"))
 	{
