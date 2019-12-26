@@ -5,7 +5,7 @@
 
 
 // Represent the tetris game.
-// It has only one public method: loop().
+// It has only 2 public methods: setSpeed() and loop().
 // Note:
 // - The coord of the screen and the coord of the array is inversed, so that's where getPiece() for.
 // - Some parts have magic number; it is to save up some spaces either above the spawn point so if the player rotate the I at spawn point,
