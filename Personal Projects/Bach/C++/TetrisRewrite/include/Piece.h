@@ -23,12 +23,6 @@ public:
 	// Return: the position of the piece.
 	// Return type: sf::Vector2i.
 	sf::Vector2i getPosition() { return position; }
-	// Return: whether or not the piece is center.
-	// Return type: bool.
-	bool IsCenter() { return isCenter; }
-	// Return: whether or not the piece is placed.
-	// Return type: bool.
-	bool IsPlaced() { return isPlaced; }
 
 	// Set the position of the piece.
 	// Param:
