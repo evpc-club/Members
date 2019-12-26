@@ -27,13 +27,13 @@ private:
 	Piece**             board;				// Represent the board.	
 	sf::Vector2i        size;				// Size of the board. Warning: it is inversed to the real coord if you use for array.
 	const int           nextBlockSpace = 6; // The space use to display the next block.
-	float				speed;				// The falling speed.
-	unsigned int		point;				//
+	float		    	speed;				// The falling speed.
+	unsigned int	    point;				//
 
 	State               gameState;			// Current game state.	
 	Block               currentBlock;		// Current controlled block.
-	Block				nextBlock;			// The next block.
-	bool				isPaused;
+	Block		    	nextBlock;			// The next block.
+	bool		    	isPaused;
 	bool				isSlide;			// Allow sliding for a short moment.
 	bool				canMove;			// Check if a piece can move down anymore.
 
