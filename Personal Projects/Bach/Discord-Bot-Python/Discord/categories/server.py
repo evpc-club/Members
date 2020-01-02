@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 
+import datetime
+
 import gconfig
 
 class Server(commands.Cog, name = "Settings", command_attrs = {"cooldown_after_parsing": True}):
@@ -52,9 +54,15 @@ class Server(commands.Cog, name = "Settings", command_attrs = {"cooldown_after_p
             config["LOG_CHANNEL"] = log.id
             gconfig.save_config(config)
             
-            embed = discord.Embed(title = "Logging Enabled", description = "This is now a logging channel.", color = discord.Color.green())
-            embed.set_author(name = self.bot.user.name, icon_url = self.bot.user.avatar_url)
-            import datetime
+            embed = discord.Embed(
+                title = "Logging Enabled", 
+                description = "This is now a logging channel.", 
+                color = discord.Color.green()
+            )
+            embed.set_author(
+                name = self.bot.user.name, 
+                icon_url = self.bot.user.avatar_url\
+            )
             embed.timestamp = datetime.datetime.utcnow()
 
             await log.send(embed = embed)
@@ -95,7 +103,7 @@ class Server(commands.Cog, name = "Settings", command_attrs = {"cooldown_after_p
             await ctx.send("Welcoming is enabled for this server. You should setup the welcome channel and message.")
     
     @commands.command(name = "welcome-setup")
-    async def set_welcome_channel(self, ctx, welcome_chan : discord.TextChannel = None, *, welcome_text : str = None):
+    async def set_welcome_channel(self, ctx, welcome_chan : discord.TextChannel = None, *, welcome_text : str = ""):
         '''
         Set or view the welcome channel and message in your server.
         If this command is invoked but you haven't enabled welcoming, it'll automatically be enabled.
@@ -123,7 +131,22 @@ class Server(commands.Cog, name = "Settings", command_attrs = {"cooldown_after_p
 
             config["WELCOME_TEXT"] = welcome_text
             gconfig.save_config(config)
-            await ctx.send("Your welcome message is: %s" % welcome_text)
+            await welcome_chan.send("Your welcome message is: %s" % welcome_text)
+
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        config = gconfig.get_config(member.guild.id)
+        if config["ERROR"] == 0 and config["STATUS_WELCOME"] == 1 and config["WELCOME_CHANNEL"] != 0:
+            welcome_channel = self.bot.get_channel(config["WELCOME_CHANNEL"])
+            welcome_text = config["WELCOME_TEXT"]
+            welcome_text = welcome_text.replace("[user.mention]", "<@%d>" % member.id)
+            welcome_text = welcome_text.replace("[user.name]", str(member))
+            welcome_text = welcome_text.replace("[guild.name]", str(member.guild))
+            welcome_text = welcome_text.replace("[guild.count]", str(len(member.guild.members)))
+
+            await welcome_channel.send(welcome_text)
+        else:
+            return
 
     @commands.command(name = "welcome-disable")
     async def disable_welcome(self, ctx):
