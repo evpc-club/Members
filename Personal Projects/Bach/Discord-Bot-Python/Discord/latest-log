@@ -1,19 +1,27 @@
-Version 1.1.2.2
-Date: Nov 28 2019
+Version 1.2.35.10
+Date: Jan 3 2019
 
 Bug fixes:
-- Fix all bugs mentioned in previous version.
+- Fixed a small bug in moderation commands display.
+- Fixed a bug where other users can react to changelog and help.
+- Fixed a bug where profile will throw 'embed.fields.3.value: This field is required' when the member has no roles.
 
-Changes and Features:
-- changelog page now has the format Page <page>/<max>.
+Changes:
+- Added Settings. Use help Settings to find out more.
+- Added Music. Use help Music to find out more.
+    + Note: I don't intend to extend this category with more actions.
 
 Development Changes:
-- Added emoji attr for most categories.
+- Finshed Logging
+- Created a test database.
+- Added server configuration files.
+- Redesigned Logging.
 
 Known Bugs:
-- Paginator and menu can be reacted by different user, creating annoyance to the person invoked the command.
+- It is unsure, but the bot starts to respond a bit slower.
+- 'RawMessageUpdateEvent' event throw 'AttributeError: no attribute 'channel_id'' (will be fixed in dpy 1.3)
 
 Working On:
-- Finding bugs.
-- Improving log format.
-- Reorganizing commands.
+- Organizing data.
+- Finding database
+- Improving performance.
